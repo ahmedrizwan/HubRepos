@@ -1,0 +1,27 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="item" type="minimize.com.hubrepos.realm.Item"/>
+    </data>
+    <FrameLayout android:layout_width="match_parent"
+                  android:layout_height="72dip"
+                  android:orientation="vertical"
+                  android:background="?attr/selectableItemBackground"
+    >
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                     >
+            <TextView android:id="@+id/textViewRepo"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:textColor="@android:color/black"
+                      android:text="@{item.name}"
+                      android:textSize="20sp"
+                      tools:text="Item"/>
+        </LinearLayout>
+
+
+    </FrameLayout>
+</layout>

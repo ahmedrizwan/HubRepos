@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HubRepos</string>
+    <string name="action_settings">Settings</string>
+    <string name="base_url">https://api.github.com/</string>
+    <string name="search_languages">Search Languages</string>
+    <string name="language">Language</string>
+</resources>

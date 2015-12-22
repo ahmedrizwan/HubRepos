@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+        >
+
+
+        <!-- Your main ActionBar (with the blue background).
+             The height is 56 + 72dp according to specs -->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/mainToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            />
+
+        <View
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_below="@id/mainToolbar"
+            android:background="?attr/colorPrimary"
+            android:minHeight="72sp"/>
+
+
+
+        <!-- Two fragments with weights 2 and 3 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/background"
+            android:layout_marginTop="-72sp"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/fragmentLanguages"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="horizontal"
+                tools:layout="@layout/fragment_languages"/>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/containerRepos"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16sp"
+                android:layout_weight="3"
+                app:cardElevation="6dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
