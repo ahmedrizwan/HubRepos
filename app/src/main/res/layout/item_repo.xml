@@ -11,15 +11,21 @@
 
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
+                      android:id="@+id/linearLayoutRepo"
+                      android:background="@android:color/black"
+                      android:orientation="vertical"
                      >
+
             <TextView android:id="@+id/textViewRepo"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:gravity="center"
-                      android:textColor="@android:color/black"
+                      android:fontFamily="sans-serif-light"
+                      android:textColor="@android:color/white"
                       android:text="@{item.name}"
                       android:textSize="20sp"
                       tools:text="Item"/>
+
         </LinearLayout>
 
 

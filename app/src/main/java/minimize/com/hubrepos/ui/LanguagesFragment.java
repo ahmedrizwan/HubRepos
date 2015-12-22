@@ -14,6 +14,7 @@ import com.minimize.android.rxrecycleradapter.RxAdapter;
 import java.util.Arrays;
 
 import minimize.com.hubrepos.BR;
+import minimize.com.hubrepos.HubReposApp;
 import minimize.com.hubrepos.R;
 import minimize.com.hubrepos.databinding.FragmentLanguagesBinding;
 import minimize.com.hubrepos.databinding.ItemLanguageBinding;
@@ -24,11 +25,13 @@ import timber.log.Timber;
  */
 public class LanguagesFragment extends BaseFragment {
     FragmentLanguagesBinding mBinding;
+    boolean isTwoPane;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_languages, container, false);
+        isTwoPane = ((ContainerActivity) getActivity()).isTwoPane();
         String[] languages = getResources().getStringArray(R.array.languages);
 
         RxAdapter<String, ItemLanguageBinding> rxAdapter = new RxAdapter<>(R.layout.item_language, Arrays.asList(languages));
@@ -40,7 +43,7 @@ public class LanguagesFragment extends BaseFragment {
                     viewDataBinding.setVariable(BR.language, item);
                     View root = viewDataBinding.getRoot();
                     int adapterPosition = simpleViewItem.getAdapterPosition();
-                    viewDataBinding.linearLayoutLanguage.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorDarkGray) : ContextCompat.getColor(getActivity(), R.color.colorGray));
+                    viewDataBinding.cardViewLanguage.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorDarkGray) : ContextCompat.getColor(getActivity(), R.color.colorGray));
                     root.setOnClickListener(v -> {
                         Timber.e("onCreateView : " + item);
                         //launch repos fragment passing in the language
@@ -48,18 +51,14 @@ public class LanguagesFragment extends BaseFragment {
                         Bundle bundle = new Bundle();
                         bundle.putString(getString(R.string.language), item);
                         reposFragment.setArguments(bundle);
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.container, reposFragment)
-                                .commit();
 
+                        HubReposApp.launchFragmentWithSharedElements(((ContainerActivity) getActivity()).isTwoPane(),
+                                LanguagesFragment.this, reposFragment,isTwoPane?R.id.containerRepos:R.id.container, null);
                     });
                 });
+        // Connect the recycler to the scroller (to let the scroller scroll the list)
         mBinding.recyclerViewLanguages.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.recyclerViewLanguages.setAdapter(rxAdapter);
         return mBinding.getRoot();
     }
-
-
 }

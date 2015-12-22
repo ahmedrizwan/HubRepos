@@ -8,7 +8,6 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/secondaryToolbar"
             android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                     android:id="@+id/imageViewSearch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="20dip"
                     android:src="@drawable/ic_search"
                 />
 
@@ -67,13 +66,21 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewLanguages"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/secondaryToolbar"
-            tools:listitem="@layout/item_language"
+
+
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_below="@id/secondaryToolbar"
+                        android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewLanguages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_language"
             />
+
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 </layout>

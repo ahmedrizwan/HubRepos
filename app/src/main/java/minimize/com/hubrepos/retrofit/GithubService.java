@@ -1,7 +1,13 @@
 package minimize.com.hubrepos.retrofit;
 
+import java.util.List;
+
+import minimize.com.hubrepos.realm.ContributorStats;
+import minimize.com.hubrepos.realm.Issue;
 import minimize.com.hubrepos.realm.Repo;
 import retrofit.http.GET;
+import retrofit.http.Path;
+import retrofit.http.Query;
 import rx.Observable;
 
 /**
@@ -9,7 +15,12 @@ import rx.Observable;
  */
 public interface GithubService {
 
-    @GET("search/repositories?q=language:java")
-    Observable<Repo> getRepositories();
+    @GET("search/repositories?")
+    Observable<Repo> getRepositories(@Query("q") String language);
 
+    @GET("repos/{owner}/{name}/stats/contributors")
+    Observable<List<ContributorStats>> getContributorsStats(@Path("owner") String owner, @Path("name") String repoName);
+
+    @GET("repos/{owner}/{name}/issues")
+    Observable<List<Issue>> getIssueEvents(@Path("owner") String owner, @Path("name") String repoName);
 }

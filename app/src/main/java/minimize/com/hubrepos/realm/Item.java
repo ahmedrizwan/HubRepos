@@ -24,7 +24,6 @@ public class Item extends RealmObject {
     @SerializedName("owner")
     @Expose
     private Owner owner;
-
     @SerializedName("html_url")
     @Expose
     private String htmlUrl;

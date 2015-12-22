@@ -17,6 +17,7 @@ import io.realm.RealmObject;
 import minimize.com.hubrepos.R;
 import minimize.com.hubrepos.realm.converters.QLRealmStringAdapter;
 import minimize.com.hubrepos.realm.converters.RealmString;
+import minimize.com.hubrepos.retrofit.GithubService;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -54,6 +55,12 @@ public class AppModule {
                 .baseUrl(context.getString(R.string.base_url))
                 .build();
         return retrofit;
+    }
+
+    @Provides
+    @Singleton
+    public GithubService providesGithubService(Retrofit retrofit){
+        return retrofit.create(GithubService.class);
     }
 
     @Provides

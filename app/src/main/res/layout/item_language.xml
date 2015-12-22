@@ -4,28 +4,29 @@
     <data>
         <variable name="language" type="String"/>
     </data>
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="72dip"
-                 android:clickable="true"
-                 android:background="?attr/selectableItemBackground">
 
-        <LinearLayout android:id="@+id/linearLayoutLanguage"
-                      android:layout_width="match_parent"
-                      android:layout_height="72dip"
-                      android:background="@android:color/black"
-                      android:orientation="vertical"
+    <LinearLayout
+        android:id="@+id/cardViewLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="72dip"
+        android:background="@android:color/black"
+        android:orientation="vertical"
+    >
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:background="?attr/selectableItemBackground"
         >
-
             <TextView android:id="@+id/textViewLanguage"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
+                      android:fontFamily="sans-serif-light"
                       android:gravity="center"
-                      android:textColor="@android:color/white"
                       android:text="@{language}"
+                      android:textColor="@android:color/white"
                       android:textSize="22dip"
                       tools:text="Language"/>
 
+        </FrameLayout>
+    </LinearLayout>
 
-        </LinearLayout>
-    </FrameLayout>
 </layout>

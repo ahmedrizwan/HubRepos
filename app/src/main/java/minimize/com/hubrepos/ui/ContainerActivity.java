@@ -11,6 +11,11 @@ import minimize.com.hubrepos.databinding.ActivityContainerBinding;
 public class ContainerActivity extends BaseActivity {
 
     ActivityContainerBinding mBinding;
+
+    public boolean isTwoPane() {
+        return mTwoPane;
+    }
+
     boolean mTwoPane;
 
     @Override

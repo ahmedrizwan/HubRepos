@@ -10,6 +10,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewRepos"
             android:layout_width="match_parent"
+            android:elevation="4dp"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:theme="@style/Theme.AppCompat.Light"
@@ -47,8 +48,9 @@
                     <TextView android:id="@+id/textViewLanguage"
                               android:layout_width="match_parent"
                               android:layout_height="match_parent"
-                              android:background="@color/colorDarkGray"
                               android:gravity="center"
+                              android:textColor="@android:color/black"
+                              android:fontFamily="sans-serif-light"
                               tools:text="Language"
                               android:textSize="30sp"/>
                 </LinearLayout>
