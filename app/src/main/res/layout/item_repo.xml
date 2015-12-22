@@ -4,28 +4,44 @@
         <variable name="item" type="minimize.com.hubrepos.realm.Item"/>
     </data>
     <FrameLayout android:layout_width="match_parent"
-                  android:layout_height="72dip"
-                  android:orientation="vertical"
-                  android:background="?attr/selectableItemBackground"
+                 android:layout_height="72dip"
+                 android:background="?attr/selectableItemBackground"
+
+                 android:orientation="vertical"
     >
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:id="@+id/linearLayoutRepo"
-                      android:background="@android:color/black"
-                      android:orientation="vertical"
-                     >
-
-            <TextView android:id="@+id/textViewRepo"
+        <LinearLayout android:id="@+id/linearLayoutRepo"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
-                      android:gravity="center"
+                      android:background="@android:color/black"
+                      android:orientation="horizontal"
+                      android:padding="@dimen/default_padding"
+        >
+
+            <TextView android:id="@+id/textViewRepo"
+                      android:layout_width="0dp"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
                       android:fontFamily="sans-serif-light"
-                      android:textColor="@android:color/white"
+                      android:gravity="center_vertical"
                       android:text="@{item.name}"
+                      android:textColor="@android:color/white"
                       android:textSize="20sp"
                       tools:text="Item"/>
 
+            <TextView android:id="@+id/textViewStarGazzers"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:fontFamily="sans-serif-light"
+                      android:gravity="center_vertical"
+                      android:text="@{String.valueOf(item.stargazersCount)}"
+                      android:textColor="@android:color/white"
+                      android:textSize="20sp"
+                      tools:text="400"/>
+            <ImageView android:layout_width="40dip"
+                       android:layout_height="40dip"
+                       android:layout_marginTop="5dip"
+                       android:src="@drawable/ic_star"/>
         </LinearLayout>
 
 
