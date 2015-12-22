@@ -1,35 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dip"
-        android:minHeight="500dip"
-    >
 
-        <TextView android:id="@+id/textViewName"
-                  tools:text="Name of the Repo"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
 
-        <TextView android:id="@+id/textViewDescription"
-                  tools:text="Some description"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:minHeight="500dip"
+            android:orientation="vertical"
+            android:padding="@dimen/default_padding"
+        >
+            <TextView android:id="@+id/textViewName"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:fontFamily="sans-serif-light"
+                      android:textSize="45sp"
+                      tools:text="Name of the Repo"/>
+            <TextView android:id="@+id/textViewDescription"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:fontFamily="sans-serif-light"
+                      android:layout_marginTop="@dimen/default_padding"
+                      android:textSize="24sp"
+                      tools:text="Some description"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="8dip"
+                          android:layout_height="30dip">
+                <ImageView
+                    android:id="@+id/imageViewStar"
+                    android:layout_width="30dip"
 
-        <TextView android:id="@+id/textViewThreeIssues"
-                  android:layout_marginTop="16dip"
-                  tools:text="First Contributor\nSecond Contributor\nThird Contributor"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_star"/>
+                <TextView android:id="@+id/textViewStarGazzers"
+                          android:layout_width="0dp"
+                          android:layout_weight="1"
+                          android:layout_height="wrap_content"
+                          android:fontFamily="sans-serif-light"
+                          android:gravity="center_vertical"
+                          android:textColor="@android:color/white"
+                          android:textSize="16sp"
+                          tools:text="400"/>
+                <TextView android:id="@+id/textViewOwner"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:fontFamily="sans-serif-light"
+                          android:gravity="center_vertical"
+                          tools:text="Owner"
+                          android:textColor="@android:color/white"
+                          android:textSize="16sp"
+                          />
+            </LinearLayout>
 
-        <TextView android:id="@+id/textViewThreeTopContributors"
-                  android:layout_marginTop="16dip"
-                  tools:text="First Issue\nSecond Issue\nThird Issue"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/textViewTopContributors"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/imageViewStar"
+                      android:layout_marginTop="8dip"
+                      android:fontFamily="sans-serif-light"
+                      android:textSize="24sp"
+                      android:text="Top Contributors"/>
 
-    </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewContributors"
+                android:layout_width="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/item_contributor"
+                />
+
+            <TextView android:id="@+id/textViewLatestIssues"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="4dip"
+                      android:fontFamily="sans-serif-light"
+                      android:textSize="24sp"
+                      android:text="Latest Issues"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewIssues"
+                android:layout_width="match_parent"
+                android:layout_marginTop="4dip"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
 </layout>

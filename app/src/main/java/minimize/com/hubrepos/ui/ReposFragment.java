@@ -54,8 +54,6 @@ public class ReposFragment extends BaseFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repo -> {
                     repoBindingRxAdapter.asObservable()
-                            .subscribeOn(Schedulers.newThread())
-                            .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(simpleViewItem -> {
                                 ItemRepoBinding viewDataBinding = simpleViewItem.getViewDataBinding();
                                 Item item = simpleViewItem.getItem();

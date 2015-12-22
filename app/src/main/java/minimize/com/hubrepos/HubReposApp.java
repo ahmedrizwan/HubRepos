@@ -57,9 +57,10 @@ public class HubReposApp extends Application {
                 fromFragment.setSharedElementEnterTransition(transitionSet);
                 toFragment.setSharedElementEnterTransition(transitionSet);
                 toFragment.setSharedElementReturnTransition(transitionSet);
-                for (View view : views) {
-                    fragmentTransaction.addSharedElement(view, view.getTransitionName());
-                }
+                if (views != null)
+                    for (View view : views) {
+                        fragmentTransaction.addSharedElement(view, view.getTransitionName());
+                    }
 
                 fragmentTransaction
                         .replace(container, toFragment)
@@ -73,7 +74,8 @@ public class HubReposApp extends Application {
 
         } else {
             if (isTwoPane)
-                fromFragment.getActivity().getSupportFragmentManager()
+                fromFragment.getActivity()
+                        .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(container, toFragment)
                         .commit();
