@@ -49,7 +49,7 @@ public class ReposFragment extends BaseFragment {
         RxAdapter<Item, ItemRepoBinding> repoBindingRxAdapter = new RxAdapter<>(R.layout.item_repo, Collections.emptyList());
         mBinding.recyclerViewRepos.setAdapter(repoBindingRxAdapter);
         mBinding.textViewLanguage.setText(language);
-        mGithubService.getRepositories("language=" + language)
+        mGithubService.getRepositories("language:" + language)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(repo -> {
