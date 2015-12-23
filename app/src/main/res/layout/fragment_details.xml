@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -10,66 +13,66 @@
             android:padding="@dimen/default_padding"
         >
             <TextView android:id="@+id/textViewName"
+                      style="@style/TextViewStyle"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      style="@style/TextViewStyle"
                       android:textSize="@dimen/heading"
                       tools:text="Name of the Repo"/>
             <TextView android:id="@+id/textViewDescription"
+                      style="@style/TextViewStyle"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      style="@style/TextViewStyle"
                       android:layout_marginTop="@dimen/default_padding"
                       android:textSize="@dimen/body"
                       tools:text="Some description"/>
 
             <LinearLayout android:layout_width="match_parent"
-                          android:orientation="horizontal"
+                          android:layout_height="30dip"
                           android:layout_marginTop="8dip"
-                          android:layout_height="30dip">
+                          android:orientation="horizontal">
                 <ImageView
                     android:id="@+id/imageViewStar"
                     android:layout_width="30dip"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_star"
-                    android:contentDescription="@string/repository_stars"/>
+                    android:contentDescription="@string/repository_stars"
+                    android:src="@drawable/ic_star"/>
 
                 <TextView android:id="@+id/textViewStarGazzers"
+                          style="@style/TextViewStyle"
                           android:layout_width="0dp"
-                          android:layout_weight="1"
                           android:layout_height="wrap_content"
+                          android:layout_weight="1"
                           android:fontFamily="sans-serif-light"
                           android:gravity="center_vertical"
-                          style="@style/TextViewStyle"
                           android:textSize="@dimen/body"
                           tools:text="400"/>
 
                 <TextView android:id="@+id/textViewOwner"
+                          style="@style/TextViewStyle"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          style="@style/TextViewStyle"
                           android:gravity="center_vertical"
-                          tools:text="Owner"
                           android:textSize="@dimen/body"
-                          />
+                          tools:text="Owner"
+                />
 
             </LinearLayout>
 
             <TextView android:id="@+id/textViewTopContributors"
+                      style="@style/TextViewStyle"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="@dimen/medium"
-                      style="@style/TextViewStyle"
-                      android:textSize="@dimen/subheading"
-                      android:text="@string/top_contributors"/>
+                      android:text="@string/top_contributors"
+                      android:textSize="@dimen/subheading"/>
 
             <FrameLayout android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                         android:layout_height="wrap_content">
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerViewContributors"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/small"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
                     tools:listitem="@layout/item_contributor"
                 />
 
@@ -81,14 +84,13 @@
                 />
             </FrameLayout>
 
-
             <TextView android:id="@+id/textViewLatestIssues"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="@dimen/small"
                       android:fontFamily="sans-serif-light"
-                      android:textSize="@dimen/subheading"
-                      android:text="@string/latest_issues"/>
+                      android:text="@string/latest_issues"
+                      android:textSize="@dimen/subheading"/>
 
             <FrameLayout android:layout_width="match_parent"
                          android:layout_height="wrap_content">
@@ -96,8 +98,8 @@
                     android:id="@+id/recyclerViewIssues"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/small"
                     android:layout_marginBottom="@dimen/small"
+                    android:layout_marginTop="@dimen/small"
                     tools:listitem="@layout/item_issue"
                 />
                 <include android:id="@+id/progressLayoutIssues"
@@ -110,4 +112,6 @@
 
 
         </LinearLayout>
+    </ScrollView>
+
 </layout>
