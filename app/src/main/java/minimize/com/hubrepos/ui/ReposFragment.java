@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,13 @@ public class ReposFragment extends BaseFragment {
                 .findViewById(R.id.progressLayout));
         mBinding.recyclerViewRepos.setLayoutManager(new LinearLayoutManager(getActivity()));
         isTwoPane = ((ContainerActivity) getActivity()).isTwoPane();
+        if (!isTwoPane) {
+            //enable back
+            ActionBar supportActionBar = ((ContainerActivity) getActivity()).getSupportActionBar();
+            if (supportActionBar != null)
+                supportActionBar
+                        .setDisplayHomeAsUpEnabled(true);
+        }
         inject(this);
         RxAdapter<Item, ItemRepoBinding> repoBindingRxAdapter = new RxAdapter<>(R.layout.item_repo, Collections.emptyList());
         mBinding.recyclerViewRepos.setAdapter(repoBindingRxAdapter);
@@ -73,7 +81,7 @@ public class ReposFragment extends BaseFragment {
             mLanguage = getArguments().getString(getString(R.string.language));
             mBinding.textViewLanguage.setText(mLanguage);
             //get details from api
-            mGithubService.getRepositories("language:" + mLanguage)
+            mGithubService.getRepositories(mLanguage.equals(getResources().getStringArray(R.array.languages)[0]) ? "stars:>0" : "language:" + mLanguage)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(repo -> {

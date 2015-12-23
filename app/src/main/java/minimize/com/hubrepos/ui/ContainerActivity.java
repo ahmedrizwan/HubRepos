@@ -2,9 +2,12 @@ package minimize.com.hubrepos.ui;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import minimize.com.hubrepos.R;
 import minimize.com.hubrepos.databinding.ActivityContainerBinding;
@@ -57,16 +60,25 @@ public class ContainerActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                FragmentManager fm = getSupportFragmentManager();
+                if (fm.getBackStackEntryCount() > 0) {
+                    fm.popBackStack();
+                }
+                return true;
+            case R.id.action_about:
+                //show about dialog
+                MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                        .title("About")
+                        .content("Github Repos!")
+                        .positiveText("Close");
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                MaterialDialog dialog = builder.build();
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

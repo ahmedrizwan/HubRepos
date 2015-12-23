@@ -4,4 +4,5 @@
     <string name="base_url">https://api.github.com/</string>
     <string name="search_languages">Search Languages</string>
     <string name="language">Language</string>
+    <string name="action_about">About</string>
 </resources>

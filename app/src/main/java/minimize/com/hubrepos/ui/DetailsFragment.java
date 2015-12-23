@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,14 @@ public class DetailsFragment extends DialogFragment {
             //make it full screen
             getDialog().getWindow()
                     .requestFeature(Window.FEATURE_NO_TITLE);
+        } else {
+            //enable back
+            ActionBar supportActionBar = ((ContainerActivity) getActivity()).getSupportActionBar();
+            if (supportActionBar != null)
+                supportActionBar
+                        .setDisplayHomeAsUpEnabled(true);
         }
+
         //set layout managers for the recyclerViews
         mBinding.recyclerViewContributors.setLayoutManager(new minimize.com.hubrepos.ui.LinearLayoutManager(getActivity()));
         mBinding.recyclerViewIssues.setLayoutManager(new minimize.com.hubrepos.ui.LinearLayoutManager(getActivity()));
