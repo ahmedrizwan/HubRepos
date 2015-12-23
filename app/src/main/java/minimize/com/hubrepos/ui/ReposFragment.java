@@ -58,7 +58,7 @@ public class ReposFragment extends BaseFragment {
                                 ItemRepoBinding viewDataBinding = simpleViewItem.getViewDataBinding();
                                 Item item = simpleViewItem.getItem();
                                 int adapterPosition = simpleViewItem.getAdapterPosition();
-                                viewDataBinding.linearLayoutRepo.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorGray) : ContextCompat.getColor(getActivity(), R.color.colorDarkGray));
+                                viewDataBinding.linearLayoutRepo.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorGray) : ContextCompat.getColor(getActivity(), android.R.color.white));
                                 viewDataBinding.setVariable(BR.item, item);
                                 viewDataBinding.executePendingBindings();
                                 viewDataBinding.getRoot()

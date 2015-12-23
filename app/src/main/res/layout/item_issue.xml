@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+
+
+        <TextView android:id="@+id/textViewIssue"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingLeft="@dimen/default_padding"
+                  android:paddingStart="@dimen/default_padding"
+                  android:paddingEnd="@dimen/default_padding"
+                  android:paddingRight="@dimen/default_padding"
+                  android:paddingTop="@dimen/medium"
+                  android:paddingBottom="@dimen/medium"
+                  android:drawableLeft="@drawable/ic_issue"
+                  android:drawableStart="@drawable/ic_issue"
+                  android:ellipsize="end"
+                  android:gravity="center_vertical"
+                  android:maxLines="1"
+                  style="@style/TextViewStyle"
+                  android:textSize="@dimen/body"
+                  tools:text="Contributor"
+        />
+
+</layout>

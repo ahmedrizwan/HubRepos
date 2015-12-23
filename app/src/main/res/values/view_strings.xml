@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="repos">Repositories</string>
+    <string name="top_contributors">Top Contributors</string>
+    <string name="latest_issues">Latest Issues</string>
+</resources>

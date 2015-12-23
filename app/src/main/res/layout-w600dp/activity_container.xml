@@ -6,12 +6,10 @@
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorDarkGray"
                     android:orientation="vertical"
         >
 
-
-        <!-- Your main ActionBar (with the blue background).
+        <!-- main ActionBar (with the blue background).
              The height is 56 + 72dp according to specs -->
         <android.support.v7.widget.Toolbar
             android:id="@+id/mainToolbar"
@@ -29,7 +27,6 @@
             android:layout_below="@id/mainToolbar"
             android:background="?attr/colorPrimary"
             android:minHeight="72sp"/>
-
 
         <!-- Two fragments with weights 2 and 3 -->
 
@@ -55,9 +52,9 @@
                 android:id="@+id/containerRepos"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="16dip"
-                android:layout_marginEnd="16dip"
-                app:cardCornerRadius="4dip"
+                android:layout_marginRight="@dimen/default_padding"
+                android:layout_marginEnd="@dimen/default_padding"
+                app:cardCornerRadius="@dimen/small"
                 android:layout_weight="3"
                 app:cardElevation="5dp"/>
 

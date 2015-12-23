@@ -43,7 +43,7 @@ public class LanguagesFragment extends BaseFragment {
                     viewDataBinding.setVariable(BR.language, item);
                     View root = viewDataBinding.getRoot();
                     int adapterPosition = simpleViewItem.getAdapterPosition();
-                    viewDataBinding.cardViewLanguage.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorDarkGray) : ContextCompat.getColor(getActivity(), R.color.colorGray));
+                    viewDataBinding.cardViewLanguage.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorGray) : ContextCompat.getColor(getActivity(), android.R.color.white));
                     root.setOnClickListener(v -> {
                         Timber.e("onCreateView : " + item);
                         //launch repos fragment passing in the language

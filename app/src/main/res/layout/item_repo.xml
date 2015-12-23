@@ -13,7 +13,6 @@
         <LinearLayout android:id="@+id/linearLayoutRepo"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
-                      android:background="@android:color/black"
                       android:orientation="horizontal"
                       android:padding="@dimen/default_padding"
         >
@@ -27,8 +26,8 @@
                       android:maxLines="1"
                       android:ellipsize="end"
                       android:text="@{item.name}"
-                      android:textColor="@android:color/white"
-                      android:textSize="20sp"
+                      android:textSize="@dimen/body"
+                      style="@style/TextViewStyle"
                       tools:text="Item"/>
 
             <TextView android:id="@+id/textViewStarGazzers"
@@ -37,8 +36,8 @@
                       android:fontFamily="sans-serif-light"
                       android:gravity="center_vertical"
                       android:text="@{String.valueOf(item.stargazersCount)}"
-                      android:textColor="@android:color/white"
-                      android:textSize="20sp"
+                      style="@style/TextViewStyle"
+                      android:textSize="@dimen/body"
                       tools:text="400"/>
             <ImageView android:layout_width="40dip"
                        android:layout_height="40dip"

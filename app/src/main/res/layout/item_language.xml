@@ -9,7 +9,6 @@
         android:id="@+id/cardViewLanguage"
         android:layout_width="match_parent"
         android:layout_height="72dip"
-        android:background="@android:color/black"
         android:orientation="vertical"
     >
         <FrameLayout android:layout_width="match_parent"
@@ -19,11 +18,10 @@
             <TextView android:id="@+id/textViewLanguage"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
-                      android:fontFamily="sans-serif-light"
+                      style="@style/TextViewStyle"
                       android:gravity="center"
                       android:text="@{language}"
-                      android:textColor="@android:color/white"
-                      android:textSize="22dip"
+                      android:textSize="@dimen/body"
                       tools:text="Language"/>
 
         </FrameLayout>
