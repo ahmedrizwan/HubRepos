@@ -3,24 +3,34 @@
         xmlns:tools="http://schemas.android.com/tools">
 
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true">
         <TextView android:id="@+id/textViewIssue"
+                  style="@style/TextViewStyle"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:paddingLeft="@dimen/default_padding"
-                  android:paddingStart="@dimen/default_padding"
-                  android:paddingEnd="@dimen/default_padding"
-                  android:paddingRight="@dimen/default_padding"
-                  android:paddingTop="@dimen/medium"
-                  android:paddingBottom="@dimen/medium"
                   android:drawableLeft="@drawable/ic_issue"
                   android:drawableStart="@drawable/ic_issue"
                   android:ellipsize="end"
                   android:gravity="center_vertical"
                   android:maxLines="1"
-                  style="@style/TextViewStyle"
+                  android:paddingBottom="@dimen/medium"
+                  android:paddingEnd="@dimen/default_padding"
+                  android:paddingLeft="@dimen/default_padding"
+                  android:paddingRight="@dimen/default_padding"
+                  android:paddingStart="@dimen/default_padding"
+                  android:paddingTop="@dimen/medium"
                   android:textSize="@dimen/body"
                   tools:text="Contributor"
         />
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:background="?attr/selectableItemBackground"
+        />
+    </RelativeLayout>
+
 
 </layout>

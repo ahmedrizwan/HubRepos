@@ -1,6 +1,8 @@
 package minimize.com.hubrepos.ui;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -210,6 +212,12 @@ public class DetailsFragment extends DialogFragment {
                     ItemIssueBinding viewDataBinding = viewHolder.getViewDataBinding();
                     Issue issue = viewHolder.getItem();
                     viewDataBinding.textViewIssue.setText(issue.getTitle());
+                    viewDataBinding.getRoot().setOnClickListener(v -> {
+                        //link for the issue details
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(issue.getHtmlUrl()));
+                        startActivity(i);
+                    });
                 });
         mBinding.recyclerViewIssues.setAdapter(rxAdapter);
     }
@@ -243,6 +251,11 @@ public class DetailsFragment extends DialogFragment {
                     viewDataBinding.textViewContributor.setText(contributorStats1.getAuthor()
                             .getLogin());
                     viewDataBinding.textViewTotal.setText(String.valueOf(contributorStats1.getTotal()));
+                    viewDataBinding.getRoot().setOnClickListener(v -> {
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(contributorStats1.getAuthor().getHtmlUrl()));
+                        startActivity(i);
+                    });
                 });
         mBinding.recyclerViewContributors.setAdapter(rxAdapter);
     }
