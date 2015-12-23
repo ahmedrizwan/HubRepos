@@ -78,4 +78,13 @@ dependencies {
     compile('com.github.afollestad.material-dialogs:core:0.8.5.3@aar') {
         transitive = true
     }
+    //robolectric
+    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile('com.squareup.assertj:assertj-android:1.1.0') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    //robotium For Instrumentation Testing
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
+    //unit testing
+    testCompile 'junit:junit:4.12'
 }

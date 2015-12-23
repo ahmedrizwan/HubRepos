@@ -142,7 +142,7 @@ public class DetailsFragment extends DialogFragment {
                             mProgressContributorsBinding.textViewError.setVisibility(View.VISIBLE);
                         });
 
-                mGithubService.getIssueEvents(owner, repoName)
+                mGithubService.getIssues(owner, repoName)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(this::fillInListWithIssues, throwable -> {

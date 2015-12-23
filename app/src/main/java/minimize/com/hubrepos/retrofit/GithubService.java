@@ -22,5 +22,5 @@ public interface GithubService {
     Observable<List<ContributorStats>> getContributorsStats(@Path("owner") String owner, @Path("name") String repoName);
 
     @GET("repos/{owner}/{name}/issues")
-    Observable<List<Issue>> getIssueEvents(@Path("owner") String owner, @Path("name") String repoName);
+    Observable<List<Issue>> getIssues(@Path("owner") String owner, @Path("name") String repoName);
 }
