@@ -9,15 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jakewharton.rxbinding.widget.RxTextView;
 import com.minimize.android.rxrecycleradapter.RxAdapter;
 
 import java.util.Arrays;
+import java.util.List;
 
 import minimize.com.hubrepos.BR;
 import minimize.com.hubrepos.HubReposApp;
 import minimize.com.hubrepos.R;
 import minimize.com.hubrepos.databinding.FragmentLanguagesBinding;
 import minimize.com.hubrepos.databinding.ItemLanguageBinding;
+import rx.Observable;
 
 /**
  * Created by ahmedrizwan on 22/12/2015.
@@ -25,15 +28,16 @@ import minimize.com.hubrepos.databinding.ItemLanguageBinding;
 public class LanguagesFragment extends BaseFragment {
     FragmentLanguagesBinding mBinding;
     boolean isTwoPane;
+    private String[] mLanguages;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_languages, container, false);
         isTwoPane = ((ContainerActivity) getActivity()).isTwoPane();
-        String[] languages = getResources().getStringArray(R.array.languages);
+        mLanguages = getResources().getStringArray(R.array.languages);
 
-        RxAdapter<String, ItemLanguageBinding> rxAdapter = new RxAdapter<>(R.layout.item_language, Arrays.asList(languages));
+        RxAdapter<String, ItemLanguageBinding> rxAdapter = new RxAdapter<>(R.layout.item_language, Arrays.asList(mLanguages));
 
         rxAdapter.asObservable()
                 .subscribe(simpleViewItem -> {
@@ -49,17 +53,30 @@ public class LanguagesFragment extends BaseFragment {
                         Bundle bundle = new Bundle();
                         bundle.putString(getString(R.string.language), item);
                         reposFragment.setArguments(bundle);
-                        if(isTwoPane){
+                        if (isTwoPane) {
                             ((ContainerActivity) getActivity()).hideSelectMessage();
                         }
-                        HubReposApp.launchFragmentWithSharedElements(((ContainerActivity) getActivity()).isTwoPane(),
-                                LanguagesFragment.this, reposFragment,isTwoPane?R.id.containerRepos:R.id.container, null);
+                        HubReposApp.launchFragmentWithSharedElements                                                         (((ContainerActivity) getActivity()).isTwoPane(),
+                                LanguagesFragment.this, reposFragment, isTwoPane ? R.id.containerRepos : R.id.container, null);
                     });
                 });
 
         // Connect the recycler to the scroller (to let the scroller scroll the list)
         mBinding.recyclerViewLanguages.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.recyclerViewLanguages.setAdapter(rxAdapter);
+
+        // Add search
+        RxTextView.afterTextChangeEvents(mBinding.editTextSearch)
+                .subscribe(textViewAfterTextChangeEvent -> {
+                    final List<String> filteredList = Observable.from(mLanguages)
+                            .filter(s -> s.toLowerCase().contains(textViewAfterTextChangeEvent.view()
+                                    .getText().toString().toLowerCase()))
+                            .toList()
+                            .toBlocking()
+                            .first();
+                    rxAdapter.updateDataSet(filteredList);
+                });
+
         return mBinding.getRoot();
     }
 }
