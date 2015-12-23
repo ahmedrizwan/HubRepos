@@ -2,6 +2,7 @@ package minimize.com.hubrepos.ui;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.minimize.android.rxrecycleradapter.RxAdapter;
+import com.minimize.android.rxrecycleradapter.SimpleViewHolder;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import minimize.com.hubrepos.BR;
 import minimize.com.hubrepos.HubReposApp;
@@ -33,6 +37,22 @@ public class ReposFragment extends BaseFragment {
     FragmentReposBinding mBinding;
     IncludeProgressBinding mProgressBinding;
     boolean isTwoPane;
+    List<Item> mItems;
+    private String mLanguage;
+
+//    private void restoreState(final Bundle savedInstanceState) {
+//        if (savedInstanceState != null) {
+//            mArtists = savedInstanceState.getParcelableArrayList(ARTIST);
+//            if (mArtists == null)
+//                mArtists = Collections.emptyList();
+//            //RecyclerView
+//            mArtistsAdapter = new ArtistsAdapter(this, mArtists);
+//            if (((ContainerActivity) getActivity()).isTwoPane())
+//                mArtistsAdapter.setSelectedArtist(savedInstanceState.getString(SELECTED_ARTIST));
+//        } else {
+//            mArtistsAdapter = new ArtistsAdapter(this, mArtists);
+//        }
+//    }
 
     @Nullable
     @Override
@@ -43,40 +63,74 @@ public class ReposFragment extends BaseFragment {
         mBinding.recyclerViewRepos.setLayoutManager(new LinearLayoutManager(getActivity()));
         isTwoPane = ((ContainerActivity) getActivity()).isTwoPane();
         inject(this);
-
-        //get language
-        String language = getArguments().getString(getString(R.string.language));
         RxAdapter<Item, ItemRepoBinding> repoBindingRxAdapter = new RxAdapter<>(R.layout.item_repo, Collections.emptyList());
         mBinding.recyclerViewRepos.setAdapter(repoBindingRxAdapter);
-        mBinding.textViewLanguage.setText(language);
-        //get details from api
-        mGithubService.getRepositories("language:" + language)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(repo -> {
-                    repoBindingRxAdapter.asObservable()
-                            .subscribe(simpleViewItem -> {
-                                ItemRepoBinding viewDataBinding = simpleViewItem.getViewDataBinding();
-                                Item item = simpleViewItem.getItem();
-                                //bind
-                                int adapterPosition = simpleViewItem.getAdapterPosition();
-                                viewDataBinding.linearLayoutRepo.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorGray) : ContextCompat.getColor(getActivity(), android.R.color.white));
-                                viewDataBinding.setVariable(BR.item, item);
-                                viewDataBinding.executePendingBindings();
-                                viewDataBinding.getRoot()
-                                        .setOnClickListener(v -> {
-                                            onRepoClick(item);
-                                        });
-                            });
-                    //update and hide progressBar
-                    repoBindingRxAdapter.updateDataSet(repo.getItems());
-                    mProgressBinding.progressBar.setVisibility(View.GONE);
-                }, throwable -> {
-                    mProgressBinding.progressBar.setVisibility(View.GONE);
-                    mProgressBinding.textViewError.setVisibility(View.VISIBLE);
-                    mProgressBinding.textViewError.setText(R.string.no_repos);
-                });
+
+        //restore state
+        if (savedInstanceState != null) {
+            ArrayList<Parcelable> items = savedInstanceState.getParcelableArrayList("items");
+            mLanguage = savedInstanceState.getString("language");
+            mBinding.textViewLanguage.setText(mLanguage);
+            if (items != null) {
+                mItems = new ArrayList<>();
+                for (Parcelable item : items) {
+                    mItems.add(Parcels.unwrap(item));
+                }
+                repoBindingRxAdapter.asObservable()
+                        .subscribe(this::bind);
+
+                repoBindingRxAdapter.updateDataSet(mItems);
+                mProgressBinding.progressBar.setVisibility(View.GONE);
+            }
+        } else {
+            //get mLan
+            mLanguage = getArguments().getString(getString(R.string.language));
+            mBinding.textViewLanguage.setText(mLanguage);
+            //get details from api
+            mGithubService.getRepositories("language:" + mLanguage)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(repo -> {
+                        repoBindingRxAdapter.asObservable()
+                                .subscribe(this::bind);
+                        //update and hide progressBar
+                        mItems = repo.getItems();
+                        repoBindingRxAdapter.updateDataSet(mItems);
+                        mProgressBinding.progressBar.setVisibility(View.GONE);
+                    }, throwable -> {
+                        mProgressBinding.progressBar.setVisibility(View.GONE);
+                        mProgressBinding.textViewError.setVisibility(View.VISIBLE);
+                        mProgressBinding.textViewError.setText(R.string.no_repos);
+                    });
+        }
         return mBinding.getRoot();
+    }
+
+    private void bind(final SimpleViewHolder<Item, ItemRepoBinding> simpleViewItem) {
+        ItemRepoBinding viewDataBinding = simpleViewItem.getViewDataBinding();
+        Item item = simpleViewItem.getItem();
+        //bind
+        int adapterPosition = simpleViewItem.getAdapterPosition();
+        viewDataBinding.linearLayoutRepo.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorGray) : ContextCompat.getColor(getActivity(), android.R.color.white));
+        viewDataBinding.setVariable(BR.item, item);
+        viewDataBinding.executePendingBindings();
+        viewDataBinding.getRoot()
+                .setOnClickListener(v -> {
+                    onRepoClick(item);
+                });
+    }
+
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        ArrayList<Parcelable> items = new ArrayList<>();
+        if (mItems != null) {
+            for (Item item : mItems) {
+                items.add(Parcels.wrap(item));
+            }
+        }
+        outState.putParcelableArrayList("items", items);
+        outState.putString("language", mLanguage);
     }
 
     private void onRepoClick(final Item item) {
