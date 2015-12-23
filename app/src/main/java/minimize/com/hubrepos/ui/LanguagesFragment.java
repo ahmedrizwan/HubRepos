@@ -18,7 +18,6 @@ import minimize.com.hubrepos.HubReposApp;
 import minimize.com.hubrepos.R;
 import minimize.com.hubrepos.databinding.FragmentLanguagesBinding;
 import minimize.com.hubrepos.databinding.ItemLanguageBinding;
-import timber.log.Timber;
 
 /**
  * Created by ahmedrizwan on 22/12/2015.
@@ -45,17 +44,19 @@ public class LanguagesFragment extends BaseFragment {
                     int adapterPosition = simpleViewItem.getAdapterPosition();
                     viewDataBinding.cardViewLanguage.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorGray) : ContextCompat.getColor(getActivity(), android.R.color.white));
                     root.setOnClickListener(v -> {
-                        Timber.e("onCreateView : " + item);
                         //launch repos fragment passing in the language
                         ReposFragment reposFragment = new ReposFragment();
                         Bundle bundle = new Bundle();
                         bundle.putString(getString(R.string.language), item);
                         reposFragment.setArguments(bundle);
-
+                        if(isTwoPane){
+                            ((ContainerActivity) getActivity()).hideSelectMessage();
+                        }
                         HubReposApp.launchFragmentWithSharedElements(((ContainerActivity) getActivity()).isTwoPane(),
                                 LanguagesFragment.this, reposFragment,isTwoPane?R.id.containerRepos:R.id.container, null);
                     });
                 });
+
         // Connect the recycler to the scroller (to let the scroller scroll the list)
         mBinding.recyclerViewLanguages.setLayoutManager(new LinearLayoutManager(getActivity()));
         mBinding.recyclerViewLanguages.setAdapter(rxAdapter);

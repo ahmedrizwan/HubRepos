@@ -49,6 +49,7 @@ public class ReposFragment extends BaseFragment {
         RxAdapter<Item, ItemRepoBinding> repoBindingRxAdapter = new RxAdapter<>(R.layout.item_repo, Collections.emptyList());
         mBinding.recyclerViewRepos.setAdapter(repoBindingRxAdapter);
         mBinding.textViewLanguage.setText(language);
+        //get details from api
         mGithubService.getRepositories("language:" + language)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,6 +58,7 @@ public class ReposFragment extends BaseFragment {
                             .subscribe(simpleViewItem -> {
                                 ItemRepoBinding viewDataBinding = simpleViewItem.getViewDataBinding();
                                 Item item = simpleViewItem.getItem();
+                                //bind
                                 int adapterPosition = simpleViewItem.getAdapterPosition();
                                 viewDataBinding.linearLayoutRepo.setBackgroundColor(adapterPosition % 2 == 0 ? ContextCompat.getColor(getActivity(), R.color.colorGray) : ContextCompat.getColor(getActivity(), android.R.color.white));
                                 viewDataBinding.setVariable(BR.item, item);
@@ -66,10 +68,13 @@ public class ReposFragment extends BaseFragment {
                                             onRepoClick(item);
                                         });
                             });
+                    //update and hide progressBar
                     repoBindingRxAdapter.updateDataSet(repo.getItems());
                     mProgressBinding.progressBar.setVisibility(View.GONE);
                 }, throwable -> {
-                    mProgressBinding.textViewError.setText(throwable.getMessage());
+                    mProgressBinding.progressBar.setVisibility(View.GONE);
+                    mProgressBinding.textViewError.setVisibility(View.VISIBLE);
+                    mProgressBinding.textViewError.setText(R.string.no_repos);
                 });
         return mBinding.getRoot();
     }
@@ -78,8 +83,9 @@ public class ReposFragment extends BaseFragment {
         //launch detail fragment
         DetailsFragment detailsFragment = new DetailsFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable("item", Parcels.wrap(item));
+        bundle.putParcelable(getString(R.string.item), Parcels.wrap(item));
         detailsFragment.setArguments(bundle);
+        //launch dialogFragment if twoPane else simply fragment launch
         if (isTwoPane) {
             //show as dialog
             detailsFragment.show(getActivity().getSupportFragmentManager(), "Details");

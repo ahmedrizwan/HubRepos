@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="message_not_available">Not Available</string>
+    <string name="no_issues">No Issues found!</string>
+    <string name="no_contributors">No contributors found!</string>
+    <string name="error_contributors">Oops! Can\'t get the contributors!</string>
+    <string name="error_issues">Oops! Can\'t get the latest issues!</string>
+    <string name="no_repos">No Repositories found!</string>
+    <string name="select_show_repos">Select a lanuage to show Popular Repositories!</string>
 </resources>

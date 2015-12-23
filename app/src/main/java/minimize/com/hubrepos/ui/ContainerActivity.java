@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import minimize.com.hubrepos.R;
 import minimize.com.hubrepos.databinding.ActivityContainerBinding;
@@ -41,7 +42,10 @@ public class ContainerActivity extends BaseActivity {
                         .commit();
             }
         }
+    }
 
+    public void hideSelectMessage(){
+        mBinding.textViewSelect.setVisibility(View.GONE);
     }
 
     @Override
