@@ -25,7 +25,7 @@ import minimize.com.hubrepos.R;
 import minimize.com.hubrepos.databinding.FragmentReposBinding;
 import minimize.com.hubrepos.databinding.IncludeProgressBinding;
 import minimize.com.hubrepos.databinding.ItemRepoBinding;
-import minimize.com.hubrepos.realm.Item;
+import minimize.com.hubrepos.models.Item;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -39,20 +39,6 @@ public class ReposFragment extends BaseFragment {
     boolean isTwoPane;
     List<Item> mItems;
     private String mLanguage;
-
-//    private void restoreState(final Bundle savedInstanceState) {
-//        if (savedInstanceState != null) {
-//            mArtists = savedInstanceState.getParcelableArrayList(ARTIST);
-//            if (mArtists == null)
-//                mArtists = Collections.emptyList();
-//            //RecyclerView
-//            mArtistsAdapter = new ArtistsAdapter(this, mArtists);
-//            if (((ContainerActivity) getActivity()).isTwoPane())
-//                mArtistsAdapter.setSelectedArtist(savedInstanceState.getString(SELECTED_ARTIST));
-//        } else {
-//            mArtistsAdapter = new ArtistsAdapter(this, mArtists);
-//        }
-//    }
 
     @Nullable
     @Override

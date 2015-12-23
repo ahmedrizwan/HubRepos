@@ -1,4 +1,4 @@
-package minimize.com.hubrepos.realm;
+package minimize.com.hubrepos.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

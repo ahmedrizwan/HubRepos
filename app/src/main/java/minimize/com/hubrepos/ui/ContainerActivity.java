@@ -23,7 +23,7 @@ public class ContainerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_container);
-        injectActivity(this);
+
         setSupportActionBar(mBinding.mainToolbar);
         mBinding.mainToolbar.setTitle(getString(R.string.app_name));
         //Check for twoPanes

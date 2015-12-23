@@ -1,21 +1,16 @@
-package minimize.com.hubrepos.realm;
+package minimize.com.hubrepos.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
-@Parcel(value = Parcel.Serialization.BEAN, analyze = { Owner.class })
-public class Owner extends RealmObject {
+@Parcel(value = Parcel.Serialization.BEAN, analyze = { Author.class })
+public class Author {
 
     @SerializedName("login")
     @Expose
     private String login;
-
-    @PrimaryKey
     @SerializedName("id")
     @Expose
     private int id;

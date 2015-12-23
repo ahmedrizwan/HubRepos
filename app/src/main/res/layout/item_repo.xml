@@ -1,7 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="item" type="minimize.com.hubrepos.realm.Item"/>
+        <variable name="item" type="minimize.com.hubrepos.models.Item"/>
     </data>
     <RelativeLayout android:layout_width="match_parent"
                  android:layout_height="@dimen/list_item"

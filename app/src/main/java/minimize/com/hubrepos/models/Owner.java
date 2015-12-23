@@ -1,13 +1,17 @@
-package minimize.com.hubrepos.realm;
+package minimize.com.hubrepos.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Author {
+import org.parceler.Parcel;
+
+@Parcel(value = Parcel.Serialization.BEAN, analyze = { Owner.class })
+public class Owner {
 
     @SerializedName("login")
     @Expose
     private String login;
+
     @SerializedName("id")
     @Expose
     private int id;

@@ -2,9 +2,9 @@ package minimize.com.hubrepos.retrofit;
 
 import java.util.List;
 
-import minimize.com.hubrepos.realm.ContributorStats;
-import minimize.com.hubrepos.realm.Issue;
-import minimize.com.hubrepos.realm.Repo;
+import minimize.com.hubrepos.models.ContributorStats;
+import minimize.com.hubrepos.models.Issue;
+import minimize.com.hubrepos.models.Repo;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;

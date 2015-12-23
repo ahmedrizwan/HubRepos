@@ -1,8 +1,11 @@
-package minimize.com.hubrepos.realm;
+package minimize.com.hubrepos.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel(value = Parcel.Serialization.BEAN, analyze = { Issue.class })
 public class Issue {
 
     @SerializedName("url")
@@ -38,12 +41,7 @@ public class Issue {
     @SerializedName("locked")
     @Expose
     private boolean locked;
-    @SerializedName("assignee")
-    @Expose
-    private Object assignee;
-    @SerializedName("milestone")
-    @Expose
-    private Object milestone;
+
     @SerializedName("comments")
     @Expose
     private int comments;
@@ -53,9 +51,7 @@ public class Issue {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("closed_at")
-    @Expose
-    private Object closedAt;
+
     @SerializedName("body")
     @Expose
     private String body;
@@ -215,33 +211,7 @@ public class Issue {
         this.locked = locked;
     }
 
-    /**
-     * @return The assignee
-     */
-    public Object getAssignee() {
-        return assignee;
-    }
 
-    /**
-     * @param assignee The assignee
-     */
-    public void setAssignee(Object assignee) {
-        this.assignee = assignee;
-    }
-
-    /**
-     * @return The milestone
-     */
-    public Object getMilestone() {
-        return milestone;
-    }
-
-    /**
-     * @param milestone The milestone
-     */
-    public void setMilestone(Object milestone) {
-        this.milestone = milestone;
-    }
 
     /**
      * @return The comments
@@ -283,20 +253,6 @@ public class Issue {
      */
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    /**
-     * @return The closedAt
-     */
-    public Object getClosedAt() {
-        return closedAt;
-    }
-
-    /**
-     * @param closedAt The closed_at
-     */
-    public void setClosedAt(Object closedAt) {
-        this.closedAt = closedAt;
     }
 
     /**
